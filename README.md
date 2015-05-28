@@ -1,4 +1,4 @@
-Please see this file in edit mode.
+Please see this file in edit mode because it is not showing all the things in read mode.
 
 This is simple booking application of hall or lawnns for events
 
