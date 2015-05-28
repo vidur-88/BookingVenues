@@ -1,3 +1,5 @@
+Please see this file in edit mode.
+
 This is simple booking application of hall or lawnns for events
 
 Schema for this application is following
