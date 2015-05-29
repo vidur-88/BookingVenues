@@ -9,6 +9,8 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+require File.expand_path('../../lib/ext/viz_doc', __FILE__)
+
 module BookingVenues
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
