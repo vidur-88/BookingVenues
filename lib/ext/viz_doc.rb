@@ -11,9 +11,18 @@ module VizDoc
     attr_accessor :logger, :bindings_map, :debug
   end
 
+  files = Dir["app/**/*.rb"]
+  classes = files.reduce([]) do |acc, f|
+    # "app/controllers/application_controller.rb" => "application_controller"
+    only_file_name = f.split('/').last[0..-4]
+
+    # application_controller => ApplicationController
+    acc << only_file_name.split('_').map{|o| o.capitalize}.join
+  end
+
   set_trace_func proc { |event, file, line, id, binding, classname|
     begin
-      if ['call', 'return'].include?(event) and ['Lawn'].include?(classname.name.split("::").first)
+      if ['call', 'return'].include?(event) and classes.include?(classname.name.split("::").first)
 
 
         #if VizDoc.bindings_map[classname.to_s].nil?
