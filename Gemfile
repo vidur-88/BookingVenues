@@ -32,6 +32,7 @@ end
 
 gem 'rdoc'
 gem "yard"
+gem 'd3-charts', '~> 1.0.1'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
