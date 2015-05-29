@@ -1,4 +1,4 @@
-class HallsController < ActionController::Base
+class HallsController < ApplicationController
 	
 	#
 	# <description>

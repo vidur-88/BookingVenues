@@ -38,6 +38,13 @@ class Lawn < ActiveRecord::Base
     Lawn.all
   end
 
+  def self.hello(name)
+    "Hello #{name}, #{age}"
+  end
+
+  def self.age
+    21
+  end
 end
 
 

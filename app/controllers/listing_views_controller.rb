@@ -1,4 +1,4 @@
-class ListingViewsController < ActionController::Base
+class ListingViewsController < ApplicationController
 
 	#
 	# <description>
