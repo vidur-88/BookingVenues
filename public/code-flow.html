@@ -7,10 +7,15 @@
 
 
 <body>
-  <h2>VizDoc</h2>
-  <div class="request-form">
-    Request Endpoint <input name="endpoint" placeholder="endpoint..." size="60" />
-    <button id="execute">Execute</button>
+<div class="control-pannel">
+    <form>
+      <span class="req-text">Request Endpoint</span>
+      <input type="search" placeholder="type text" name="endpoint" >
+    </form>
+    <br>
+    <a href="#" id="play" class="action-button shadow animate green">Play</a>
+    <a href="#" id="stop" class="action-button shadow animate blue">Pause</a>
+    <a href="#" id="replay" class="action-button shadow animate red">Replay</a>
   </div>
   <div id="animation">
   </div>
@@ -21,6 +26,7 @@
 <script src="js/vis.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
+    // sample data
     // var data = [{
     //  'id' : 0,
     //  'class_name' : 'OrderController',
@@ -56,11 +62,10 @@
     //  'return_value' : 'order json'
     // }];
 
-    $("#execute").on('click', function(e){
+    $("#play").on('click', function(e){
       var endpoint = $("input[name=endpoint]").val()+"?vizdoc=true";
       $.when($.ajax(endpoint)).done(function(data){
         $.when($.ajax("/log/show?filename="+data.filename)).done(function(data){
-          debugger
           window.karma = [];
           if(typeof window.animation_obj != "undefined")
             animation_obj.network.destroy();
@@ -80,6 +85,7 @@
       if(last_karma == null) return;
       animation.edges.add({to: last_karma.parent_id, from: last_karma.node_id, label: last_karma.return_value});
       animation.network.selectNodes([last_karma.parent_id], false);
+      animation.network.focus(last_karma.parent_id, { animation: true});
       setTimeout(function(){simulate_animation(animation, last_karma.parent_id, last_karma.siblings)}, 1000);
     }
     else {
@@ -88,6 +94,7 @@
       animation.nodes.add({id: node.id, label: [node.class_name, node.method_name].join("::")});
       animation.edges.add({to: node.id, from: root_id, label: node.params});
       animation.network.selectNodes([node.id], false);
+      animation.network.focus(node.id, { animation: true});
 
       setTimeout(function(){
         karma.push({
@@ -116,7 +123,7 @@
       layout: {
         hierarchical: {
           enabled: true,
-          levelSeparation: 250,
+          levelSeparation: 200,
           direction: 'UD',   // UD, DU, LR, RL
           sortMethod: 'directed'
         }
@@ -134,6 +141,10 @@
         dragNodes: false
       },
       nodes: {
+        scaling: {
+          min: 10,
+          max: 30
+        },
         shadow: true,
         shape: 'ellipse',
         color: {

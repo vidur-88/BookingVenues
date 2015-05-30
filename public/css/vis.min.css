@@ -2,6 +2,78 @@ body {
   text-align: center;
 }
 
+/**********************/
+
+.req-text { float: left; padding: 0 10px 0 0; color: #666}
+
+input[type=search] {
+  text-align: left;
+  cursor: pointer;
+  display: block;
+  width: 65%;
+  padding: 10px;
+  letter-spacing: 4px;
+  word-spacing: 20px;
+}
+
+.control-pannel {
+  margin: 20px auto;
+  text-align: center;
+  width: 400px;
+  position: relative;
+  z-index: 1;
+}
+
+.animate
+{
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+}
+
+.action-button
+{
+  position: relative;
+  padding: 5px 43px;
+  margin: 0px 10px 10px 0px;
+  float: left;
+  border-radius: 10px;
+  font-family: 'Pacifico', cursive;
+  font-size: 15px;
+  color: #FFF;
+  text-decoration: none;
+}
+
+.blue
+{
+  background-color: #3498DB;
+  border-bottom: 5px solid #2980B9;
+  text-shadow: 0px -2px #2980B9;
+}
+
+.red
+{
+  background-color: #E74C3C;
+  border-bottom: 5px solid #BD3E31;
+  text-shadow: 0px -2px #BD3E31;
+}
+
+.green
+{
+  background-color: #82BF56;
+  border-bottom: 5px solid #669644;
+  text-shadow: 0px -2px #669644;
+}
+
+.action-button:active
+{
+  transform: translate(0px,5px);
+  -webkit-transform: translate(0px,5px);
+  border-bottom: 1px solid;
+}
+
+/*******************/
+
+
 #animation {
   width: 600px;
   height: 700px;
@@ -832,7 +904,7 @@ div.vis-network-tooltip {
   white-space: nowrap;
 
   font-family: verdana;
-  font-size:14px;
+  font-size:12px;
   font-color:#000000;
   background-color: #f5f4ed;
 
