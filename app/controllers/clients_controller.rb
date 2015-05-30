@@ -1,4 +1,4 @@
-class ClientsController < ActionController::Base
+class ClientsController < ApplicationController
 
 	#
 	# <description>

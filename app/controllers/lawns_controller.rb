@@ -1,4 +1,4 @@
-class LawnsController < ActionController::Base
+class LawnsController < ApplicationController
 	#
 	# <description>
 	#
@@ -92,4 +92,9 @@ class LawnsController < ActionController::Base
 		end
 	end
 
+    def hello
+      name = params[:name]
+      x = Lawn.hello(name)
+      render json: "#{x}", status: 200
+    end
 end

@@ -1,5 +1,7 @@
 BookingVenues::Application.routes.draw do
 
+  get "log/show"
+
   post "/clients" => "clients#create"
   get "/clients" => "clients#index"
   get "/clients/:id" => "clients#show"
@@ -15,6 +17,7 @@ BookingVenues::Application.routes.draw do
   get "/lawns/:id/edit" => "lawns#edit"
   put "lawns/:id" => "lawns#update"
   delete "/lawns/:id" => "lawns#destroy"
+  get "/lawns/:id/hello/:name" => "lawns#hello"
 
   post "/halls" => "halls#create"
   get "/halls" => "halls#index"
