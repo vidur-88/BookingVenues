@@ -1,3 +1,20 @@
+body {
+  text-align: center;
+}
+
+#animation {
+  width: 600px;
+  height: 700px;
+  margin: 0 auto;
+}
+
+.vis-network {
+  top: 0px;
+  left: 0px;
+  right: 0px;
+
+}
+
 .vis .overlay {
   position: absolute;
   top: 0;
@@ -377,7 +394,7 @@
   */
 }
 
-/* TODO: get animation working nicely
+/*TODO: get animation working nicely
 
 .vis-item {
   -webkit-transition: top .4s ease-in-out;
@@ -556,10 +573,10 @@
 }
 
 .vis-graph-group9 {
-    fill: #8f3938;
+    fill: #ffffff;
     fill-opacity:0;
     stroke-width:2px;
-    stroke: #8f3938;
+    stroke: #ffffff;
 }
 
 .vis-timeline .vis-fill {
