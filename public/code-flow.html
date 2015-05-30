@@ -8,6 +8,10 @@
 
 <body>
   <h2>VizDoc</h2>
+  <div class="request-form">
+    Request Endpoint <input name="endpoint" placeholder="endpoint..." size="60" />
+    <button id="execute">Execute</button>
+  </div>
   <div id="animation">
   </div>
 </body>
@@ -16,47 +20,57 @@
 <script src="js/underscore-min.js"></script>
 <script src="js/vis.min.js"></script>
 <script type="text/javascript">
-  window.karma = [];
   $(document).ready(function(){
-    var data = [{
-     'id' : 0,
-     'class_name' : 'OrderController',
-     'method_name' : 'Index',
-     'params': '{order_id: 5}',
-     'calls' : [
-       {
-         'id' : 1,
-         'class_name' : 'User',
-         'method_name' : 'Find',
-         'params' : '{user_id : 10}',
-         'calls' : [],
-         'return_value' : 'user_data'
-       },
-       {
-         'id' : 2,
-         'class_name' : 'Order',
-         'method_name' : 'Find',
-         'params' : '{order_id : 5}',
-         'calls' : [
-           {
-             'id' : 3,
-             'class_name' : 'Restaurant',
-             'method_name' : 'Find',
-             'params' : '{restaurant_id : 100}',
-             'calls' : [],
-             'return_value' : 'restaurant_data'
-           }
-         ],
-         'return_value' : 'order_data'
-       }
-     ],
-     'return_value' : 'order json'
-    }];
+    // var data = [{
+    //  'id' : 0,
+    //  'class_name' : 'OrderController',
+    //  'method_name' : 'Index',
+    //  'params': '{order_id: 5}',
+    //  'calls' : [
+    //    {
+    //      'id' : 1,
+    //      'class_name' : 'User',
+    //      'method_name' : 'Find',
+    //      'params' : '{user_id : 10}',
+    //      'calls' : [],
+    //      'return_value' : 'user_data'
+    //    },
+    //    {
+    //      'id' : 2,
+    //      'class_name' : 'Order',
+    //      'method_name' : 'Find',
+    //      'params' : '{order_id : 5}',
+    //      'calls' : [
+    //        {
+    //          'id' : 3,
+    //          'class_name' : 'Restaurant',
+    //          'method_name' : 'Find',
+    //          'params' : '{restaurant_id : 100}',
+    //          'calls' : [],
+    //          'return_value' : 'restaurant_data'
+    //        }
+    //      ],
+    //      'return_value' : 'order_data'
+    //    }
+    //  ],
+    //  'return_value' : 'order json'
+    // }];
 
-    var animation = init_animation();
-    window.animation = animation;
-    animation.nodes.add({id:'root', label: 'Start'});
-    simulate_animation(animation, 'root', data, null);
+    $("#execute").on('click', function(e){
+      var endpoint = $("input[name=endpoint]").val()+"?vizdoc=true";
+      $.when($.ajax(endpoint)).done(function(data){
+        $.when($.ajax("/log/show?filename="+data.filename)).done(function(data){
+          debugger
+          window.karma = [];
+          if(typeof window.animation_obj != "undefined")
+            animation_obj.network.destroy();
+          window.animation_obj = init_animation();
+          animation_obj.nodes.add({id:'root', label: 'Start'});
+          simulate_animation(animation_obj, 'root', data);
+        });
+      });
+
+    });
   });
 
   simulate_animation = function(animation, root_id, data){
@@ -120,7 +134,7 @@
         dragNodes: false
       },
       nodes: {
-        shadow: 'enabled',
+        shadow: true,
         shape: 'ellipse',
         color: {
           highlight: "#f15c2c"
